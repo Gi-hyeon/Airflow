@@ -9,7 +9,7 @@ from airflow.sdk import DAG
     
 with DAG(
     # dag_id="example_bash_operator", # dags id = python file name 직관적으로 빨리 찾을 수 있게 일치시킴
-    dag_id="example_bash_operator",
+    dag_id="dags_bash_operator",
     schedule="0 0 * * *",
     start_date=pendulum.datetime(2021, 1, 1, tz="Asia/Seoul"), # UTC -> Asia/Seoul UTC 설정 시 9시간 차이
     catchup=False
