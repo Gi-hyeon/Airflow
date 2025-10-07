@@ -2,13 +2,13 @@ import pendulum
 
 from airflow.sdk import dag, task
 
-with dag(
+with DAG(
     dag_id="dags_python_task_decorator",
     schedule="0 2 * * 1",
     start_date=pendulum.datetime(2021, 1, 1, tz="Asia/Seoul"),
     catchup=False,
     tags=["example"],
-) as DAG:
+) as dag:
     # [START howto_operator_python]
     @task(task_id="python_task_1")
     def print_context(some_input):
