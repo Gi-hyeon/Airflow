@@ -15,8 +15,11 @@ with DAG(
     # START_DATE: 전월 말일, END_DATE: 1일 전
     bash_task_1 = BashOperator(
         task_id='bash_task_1',
-        env={'START_DATE':'{{ data_interval_start.in_timezone("Asia/Seoul") | ds }}',
-             'END_DATE':'{{ (data_interval_end.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(days=1)) | ds}}'
+        env={
+            # 'START_DATE':'{{ data_interval_start.in_timezone("Asia/Seoul") | ds }}','
+            # 3.x~ 버전 변경으로 인해.. 전월말일 계산하는 로직 직접 작성
+            'START_DATE': '{{ ((data_interval_start.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(months=1)).replace(day=1) - macros.timedelta(days=1)) | ds }}',
+            'END_DATE':'{{ (data_interval_end.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(days=1)) | ds}}'
         },
         bash_command='echo "START_DATE: $START_DATE" && echo "END_DATE: $END_DATE"'
     )
