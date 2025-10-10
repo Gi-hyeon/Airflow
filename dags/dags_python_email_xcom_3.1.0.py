@@ -8,7 +8,7 @@ from airflow.providers.smtp.operators.smtp import EmailOperator
 from airflow.sdk import DAG, task
 
 with DAG(
-    dag_id="dags_python_email_operator",
+    dag_id="dags_python_email_operator_3.1.0",
     schedule="0 8 1 * *",
     start_date=pendulum.datetime(2023, 3, 1, tz="Asia/Seoul"),
     catchup=False
